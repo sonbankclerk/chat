@@ -17,8 +17,8 @@ public class UserDao {
 		Connection con = ds.getConnection();
 		return con;
 	}
-	public String lastMessage(String num) {
-		String sql = "SELECT * FROM ChatHistory WHERE ChatRoomNumber = "+num+" ORDER BY MessageID DESC LIMIT 1;";
+	public String inserUser(String id, String pw, String name) {
+		String sql = "";
 		try (
 			Connection con = getConnection();
 			Statement stmt = con.createStatement();
