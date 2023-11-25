@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.Command;
+import command.UserInsertCommand;
+import command.UserSelectCommand;
+
 @WebServlet("*.do")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,6 +29,29 @@ public class Controller extends HttpServlet {
 			case "login":
 				viewPage="WEB-INF/view/login.jsp";
 				break;
+			case "signup":
+				viewPage="WEB-INF/view/signup.jsp";
+				break;
+			case "userInsert":
+				Command userInsert = new UserInsertCommand();
+				userInsert.execute(request, response);
+				viewPage="WEB-INF/view/login.jsp";
+				break;
+			case "userSelect":
+				Command userSelect = new UserSelectCommand();
+				userSelect.execute(request, response); 
+				// 로그인 성공 체크
+				if(request.getSession().getAttribute("name") != null) {
+					viewPage="home.do";				
+				}
+				else {
+					viewPage="WEB-INF/view/login.jsp";
+				}
+				break;
+			case "home":
+				viewPage="WEB-INF/view/home.jsp";
+				break;
+				
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);

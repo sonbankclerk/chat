@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<style>
+
+    <style>
         body{
             padding: 0;
             margin: 0;
@@ -61,30 +62,39 @@
         }
     </style>
 <body>
-
     <div id="black-bar"></div>
     <a href="index.do"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
     <div id="content">
-        <form action="userSelect.do" method="post">
+        <form action="userInsert.do" method="post">
             <table>
                 <tr>
                     <td class="left-td"></td>
-                    <td class="right-td"><h1>Log in</h1></td>
+                    <td class="right-td"><h1>Sign up</h1></td>
                 </tr>
                 <tr>
-                    <td class="left-td"><label for="id">USERNAME</label></td>
+                    <td class="left-td"><label for="id">ID</label></td>
                     <td class="right-td"><input type="text" id="id" name="id"></td>
                 </tr>
                 <tr>
-                    <td class="left-td"><label for="pw">PASSWORD</label></td>
-                    <td class="right-td"><input type="password" id="pw" name="pw"></td>
+                    <td class="left-td"><label for="name">Nickname</label></td>
+                    <td class="right-td"><input type="text" id="name" name="name"></td>
                 </tr>
                 <tr>
+                    <td class="left-td"><label for="mail">Email</label></td>
+                    <td class="right-td"><input type="email" id="mail" name="mail"></td>
+                </tr>
+                <tr>
+                    <td class="left-td"><label for="pw">Password</label></td>
+                    <td class="right-td"><input type="password" id="pw" name="pw"></td>
+                </tr>
+                
+                <tr>
                     <td class="left-td"></td>
-                    <td class="right-td"><button type="submit">Sign in</button></td>
+                    <td class="right-td"><button type="submit">Create Account</button></td>
                 </tr>
             </table>
         </form>
     </div>
+
 </body>
 </html>

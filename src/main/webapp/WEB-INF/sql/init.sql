@@ -1,38 +1,33 @@
 CREATE DATABASE chatdb;
-CREATE USER 'chat'@'localhost' IDENTIFIED BY '1234';
-GRANT ALL PRIVILEGES ON chatdb.* TO 'chat'@'localhost';
+CREATE USER 'chat'@'%' IDENTIFIED BY '1234';
+GRANT ALL PRIVILEGES ON chatdb.* TO 'chat'@'%';
 FLUSH PRIVILEGES;
 
 DROP TABLE ChatRoomMembers;
 DROP TABLE ChatRooms;
 DROP TABLE ChatHistory;
 DROP TABLE Users;
--- 사용자 정보를 저장하는 테이블
-CREATE TABLE Users (
-    ID VARCHAR(20) PRIMARY KEY,
-    Password VARCHAR(20) NOT NULL,
-    Name VARCHAR(50) NOT NULL
+CREATE TABLE users (
+    id VARCHAR(20) PRIMARY KEY,
+    pw VARCHAR(20) NOT NULL,
+    name VARCHAR(50) NOT NULL
 );
--- 채팅 기록을 저장하는 테이블
-CREATE TABLE ChatHistory (
-	MessageID INT AUTO_INCREMENT PRIMARY KEY,
-    ChatRoomNumber INT NOT NULL,
-    ID VARCHAR(20) NOT NULL,
-    Message TEXT,
-    FOREIGN KEY (ID) REFERENCES Users(ID)
+CREATE TABLE chatRooms (
+    chatRoomNumber INT AUTO_INCREMENT PRIMARY KEY,
+    roomName VARCHAR(50) NOT NULL
 );
-
--- 채팅방을 식별하는 테이블
-CREATE TABLE ChatRooms (
-    ChatRoomNumber INT AUTO_INCREMENT PRIMARY KEY,
-    RoomName VARCHAR(50) NOT NULL
+CREATE TABLE chatHistory (
+	messageID INT AUTO_INCREMENT PRIMARY KEY,
+    chatRoomNumber INT NOT NULL,
+    id VARCHAR(20) NOT NULL,
+    message TEXT,
+    FOREIGN KEY (id) REFERENCES users(id)
 );
--- 채팅방에 누가 소속되어 있는지 저장하는 테이블
-CREATE TABLE ChatRoomMembers (
-    ID VARCHAR(20) NOT NULL,
-    ChatRoomNumber INT NOT NULL,
-    FOREIGN KEY (ID) REFERENCES Users(ID),
-    FOREIGN KEY (ChatRoomNumber) REFERENCES ChatRooms(ChatRoomNumber)
+CREATE TABLE chatRoomMembers (
+    id VARCHAR(20) NOT NULL,
+    chatRoomNumber INT NOT NULL,
+    FOREIGN KEY (id) REFERENCES users(id),
+    FOREIGN KEY (chatRoomNumber) REFERENCES chatRooms(chatRoomNumber)
 );
 SELECT * FROM ChatHistory;
 INSERT INTO USERs (ID, PASSWORD, name) VALUES("admin", "1111", "관리자");
