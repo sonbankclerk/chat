@@ -21,10 +21,28 @@
         }
 	</style>
 <body>
-    <div id="black-bar"></div>
-    <a href="index.do"><img src="${pageContext.request.contextPath}/img/logo.png" alt=""></a>
-	<% 
-		out.print("<h1>"+session.getAttribute("name")+"</h1>"); 
-	%>
+    
+<div class="navbar">
+    <div class="nav-section">
+        <%out.println("네비게이션 바"); %>
+    </div>
+</div>
+<div class="container">
+    <div class="left-section">
+        <%out.println("친구목록"); %>
+    </div>
+    
+    <div class="mid-section">
+        <%out.println("채팅"); %>
+    </div>
+    <div class="chat-input-section">
+        <input type="text" placeholder="메시지 입력">
+        <button>전송</button>
+    </div>
+
+    <div class="right-section">
+        <%out.println("채팅방목록"); %>
+    </div>
+</div>
 </body>
 </html>
