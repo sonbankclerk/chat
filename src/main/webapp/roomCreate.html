@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        /* 네비게이션 바 스타일 */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+/* 네비게이션 바 스타일 */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -72,14 +72,16 @@
 
 .mid-section {
   flex: 2;
+  position:relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
-.chat-content {
+
+.mid-content {
   padding: 10px;
   background-color: #666; /* 중간 회색으로 변경 */
-  flex: 1; /* 채팅 내용 영역이 최대한 확장되도록 설정 */
-  overflow: auto; /* 채팅 내용이 넘칠 때 스크롤 표시 */;
+  flex: 1; /*채팅 내용 영역이 최대한 확장되도록 설정 */
 }
 
 .left-section {
@@ -100,18 +102,15 @@
 }
 
 /* 입력창 스타일 */
-.chat-input-section {
+.roomName {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   background-color: #f1f1f1;
-  position: fixed; /* 화면 아래에 고정 */
-  bottom: 0; /* 화면 하단에 위치 */
-  /* width: 100%; */
 }
 
-.chat-input-section input {
+.roomName input {
   flex: 1;
   padding: 8px;
   margin-right: 10px;
@@ -120,7 +119,7 @@
   font-size: 16px;
 }
 
-.chat-input-section button {
+.roomCreateBtn {
   padding: 8px 15px;
   background-color: #4682B4;
   color: white;
@@ -128,10 +127,18 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  display: flex;
+  margin-left: auto;
+  margin-top: 10px;
 }
 
-.chat-input-section button:hover {
+.roomCreateBtn :hover {
   background-color: #6495ED;
+}
+
+.friendsList select {
+  width: 100%;
+  margin-top: 20px;
 }
 
 .right-section {
@@ -160,12 +167,12 @@
   }
 }
 
-    </style>
+</style>
 </head>
 <body>
     <div class="navbar">
         <div class="nav-section">
-            <%out.println("네비게이션 바"); %>
+            <h4>네비게이션바</h4>
         </div>
     </div>
     <div class="container">
@@ -177,36 +184,37 @@
                 </form>
             </div>
             <div class="lower-left">
-                <%out.println("친구목록"); %>
+                <h2>친구목록</h2>
             </div>
         </div>
         
         <div class="mid-section">
             <!-- 채팅 내용을 표시하는 부분 -->
-            <div class="chat-content">
-                <%out.println("채팅 내용 표시 영역"); %>
-            </div>
-            
-            <!-- 메시지 입력창 -->
-            <div class="chat-input-section">
-                <input type="text" placeholder="메시지 입력">
-                <button>전송</button>
+            <div class="mid-content">
+                <h2>채팅방 생성</h2>
+                <form action="roomInsert.do" method="post">
+                    <div class="roomName">
+                        <input type="text" id="roomName" name="roomName" placeholder="채팅방 이름">
+                    </div>
+                    <div class="friendsList">
+                        <select name="friends" multiple size="10">
+                        <c:forEach var="friendID" items="${friendIDList}">
+                            <option value="${friendID}">${friendID}</option>
+                        </c:forEach>
+                        
+                    </select>
+                    </div>    
+                    <button class= "roomCreateBtn" type="submit">채팅방 생성</button>
+                </form>
             </div>
         </div>
     
         <div class="right-section">
             <div class="upper-right">
-                <form action="roomCreate.do" method="post">
-                <input type="hidden" name="friendID" value="${friendID}">
-                <button>채팅방 생성</button>
-                </form>
+                <h2>오른쪽 위</h2>
             </div>
             <div class="lower-right">
-                <c:forEach items="${chatRooms}" var="room">
-                <a href="home.do?roomNumber=">
-                    채팅방
-                </a>
-                </c:forEach>
+                <h3>채팅방목록</h3>
             </div>
         </div>
     </div>
